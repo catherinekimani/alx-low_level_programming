@@ -1,10 +1,15 @@
 #!/bin/bash
-#include <stdio.h>
 /**
- * main - A program that prints a line with puts function
- * Return: 0 (Success)
+ * main - Entry point
+ *
+ * Return: Always 0 (Success)
  */
-int main(void){
-	puts("\"Programming is like building a multilingual puzzle");
-	return 0;
+int main(void)
+{
+    /* Use the puts function to print the message */
+    puts("Programming is like building a multilingual puzzle\n");
+
+    /* Return 0 to indicate successful completion */
+    return (0);
 }
+
