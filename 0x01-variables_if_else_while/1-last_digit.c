@@ -3,8 +3,8 @@
 #include <stdio.h>
 
 /**
- * main - generates random number and displays whether number
- * is positive, zero, or negative
+ * main - entry point
+ * print last digit
  * Return: 0
  */
 int main(void)
