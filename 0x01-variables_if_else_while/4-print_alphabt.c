@@ -2,7 +2,7 @@
 /**
  * main -entry point
  * print lowercase letters except q and e
- * Return : Always 0 (Success)
+ * Return: Always 0 (success)
  */
 int main(void)
 {
