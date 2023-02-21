@@ -1,9 +1,9 @@
 #include "main.h"
 /**
- * main - entry point
- * _isalpha -  Return 1 if c letter is a letter, 0 if not.
- * @c: char type letter
- * Return: 1 if letter, 0 if not
+ *  _isalpha - checks if a character is alphabetic
+ *  @c: the character to be checked
+ *
+ *  Return: 1 if c is a letter, lowercase or uppercase, 0 otherwise
  */
 int _isalpha(int c)
 {
