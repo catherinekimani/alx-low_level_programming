@@ -6,11 +6,12 @@
  */
 int _isdigit(int c)
 {
-	c = 0;
-
-	while (c < 10)
+	if (c >= '0' && c <= '9')
 	{
 		return (1);
 	}
-	return (0);
+	else
+	{
+		return (0);
+	}
 }
