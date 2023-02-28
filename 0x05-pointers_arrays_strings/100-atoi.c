@@ -1,4 +1,4 @@
-# include "main.h"
+#include "main.h"
 /**
  * _atoi - convert string to interger
  * @s: pointer to convert
@@ -6,9 +6,8 @@
  */
 int _atoi(char *s)
 {
-	int i = 0;
-	int sign = 1;
-	int result = 0;
+	unsigned int i = 0;
+	int sign = 1, result = 0;
 
 	if (s[0] == '\0')
 	{
