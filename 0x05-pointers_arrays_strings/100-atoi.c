@@ -5,36 +5,32 @@
  * Return: an integer
  */
 int _atoi(char *s)
+
 {
-	unsigned int i = 0;
-	int sign = 1, result = 0;
 
-	if (s[0] == '\0')
-	{
-		return (0);
-	}
+	int i = 0;
+	unsigned int result = 0;
+	int sign = 1;
+	int hasDigits = 0;
 
-	if (s[0] == '-')
+	while (s[i])
 	{
-		sign = -1;
-		i++;
-	}
-	else if (s[0] == '+')
-	{
-		i++;
-	}
-
-	for (; s[i] != '\0'; i++)
-	{
-		if (s[i] >= '0' && s[i] <= '9')
+		if (s[i] == '-')
 		{
-			result = result * 10 + (s[i] - '0');
+			sign *= -1;
 		}
-		else
+		while (s[i] >= '0' && s[i] <= '9')
+		{
+			hasDigits = 1;
+			result = (result * 10) + (s[i] - '0');
+			i++;
+		}
+		if (hasDigits == 1)
 		{
 			break;
 		}
+		i++;
 	}
-
-	return (sign * result);
+	result *= sign;
+	return (result);
 }
