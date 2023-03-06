@@ -5,22 +5,14 @@
  * @a: 2d array of int types
  * @size: size of array (square)
  */
-
 void print_diagsums(int *a, int size)
 {
-	int sum1 = 0, sum2 = 0;
-	int i, j;
+	int i, n, sum1 = 0, sum2 = 0;
 
-	for (i = 0; i < size; i++)
-	{
-		sum1 += *(a + i * size + i);
-	}
+	for (i = 0; i <= (size * size); i = i + size + 1)
+		sum1 = sum1 + a[i];
 
-	for (i = 0, j = size - 1; i < size; i++, j--)
-	{
-		sum2 += *(a + i * size + j);
-	}
-
-	printf("Sum of first diagonal: %d\n", sum1);
-	printf("Sum of second diagonal: %d\n", sum2);
+	for (n = size - 1; n <= (size * size) - size; n = n + size - 1)
+		sum2 = sum2 + a[n];
+	printf("%d, %d\n", sum1, sum2);
 }
