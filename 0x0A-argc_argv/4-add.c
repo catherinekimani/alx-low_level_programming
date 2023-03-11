@@ -9,27 +9,25 @@
  *
  * Return: 0 if successful, 1 otherwise
  */
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-	int i, sum = 0, num;
+	int num, digit, sum = 0;
 
-	if (argc == 1)
+	for (num = 1; num < argc; num++)
 	{
-		printf("0\n");
-		return (0);
-	}
-
-	for (i = 1; i < argc; i++)
-	{
-		num = atoi(argv[i]);
-		if (num <= 0)
+		for (digit = 0; argv[num][digit]; digit++)
 		{
-			printf("Error\n");
-			return (1);
+			if (argv[num][digit] < '0' || argv[num][digit] > '9')
+			{
+				printf("Error\n");
+				return (1);
+			}
 		}
-		sum += num;
+
+		sum += atoi(argv[num]);
 	}
 
 	printf("%d\n", sum);
+
 	return (0);
 }
