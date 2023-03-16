@@ -2,52 +2,47 @@
 #include "main.h"
 
 /**
- * _realloc - Reallocates a memory block using malloc and free
- * @ptr: Pointer to the memory previously allocated with a call to malloc
- * @old_size: Size, in bytes, of the allocated space for ptr
- * @new_size: New size, in bytes, of the new memory block
+ * _realloc - reallocates a memory block using malloc and free
+ * @ptr: pointer to the memory previously allocated with malloc
+ * @old_size: size, in bytes, of the allocated space for ptr
+ * @new_size: new size, in bytes, of the new memory block
  *
- * Return: Pointer to the reallocated memory block
- *         NULL if new_size is 0 and ptr is not NULL
+ * Return: pointer to the newly allocated memory block
+ * or NULL if the allocation fails
  */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
+	char *new_mem_block, *old_ptr;
 	unsigned int i;
-	void *new_memory_block;
-	char *p;
-	char *new_p;
-	/* If new_size is 0, free ptr and return NULL */
-	if (new_size == 0)
+
+	/* if new size is the same as old size,return the old pointer */
+	if (new_size == old_size)
+		return (ptr);
+
+	/* if old pointer is NULL, allocate New block */
+	if (ptr == NULL)
+		return (malloc(new_size));
+
+	if (new_size == 0 && ptr != NULL)
 	{
 		free(ptr);
 		return (NULL);
 	}
-	/* If ptr is NULL, equivalent to malloc(new_size) */
-	if (ptr == NULL)
-	{
-		return (malloc(new_size));
-	}
-	/* If new_size and old_size are the same, do nothing and return ptr */
-	if (new_size == old_size)
-	{
-		return (ptr);
-	}
-	/* Allocate new mem block of new_size */
-	new_memory_block = malloc(new_size);
-	if (new_memory_block == NULL)
-	{
-		/* If malloc fails, return NULL */
+
+	/* allocate a new block using malloc */
+	new_mem_block = malloc(new_size);
+	/* if malloc fails return NULL */
+	if (new_mem_block == NULL)
 		return (NULL);
-	}
-	/* Copy the contents of the old mem block to the new mem block */
-	p = ptr;
-	new_p = new_memory_block;
+
+	/*Copy the contents of the old mem block to the new mem block */
+	old_ptr = ptr;
 	for (i = 0; i < old_size && i < new_size; i++)
-	{
-		new_p[i] = p[i];
-	}
-	/* Free the old mem block */
+		new_mem_block[i] = old_ptr[i];
+
+	/* free the old block*/
 	free(ptr);
-	/* Return pointer to the new mem block */
-	return (new_memory_block);
+
+	/* return the pointer to the new block */
+	return (new_mem_block);
 }
