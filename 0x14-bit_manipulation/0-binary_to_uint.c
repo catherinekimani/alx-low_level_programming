@@ -25,6 +25,10 @@ unsigned int binary_to_uint(const char *b)
 		num <<= 1;
 		num += b[str_length] - '0';
 		str_length++;
+		if (b[str_length] == '\0')
+			break;
+		if (b[str_length] != '0' && b[str_length] != '1')
+			return (0);
 	}
 	return (num);
 }
