@@ -2,8 +2,8 @@
 void check_args(int argc);
 int open_file_read(char *filename);
 int open_file_write(char *filename);
-void read_and_write(int fileFrom, int fileTo);
-void close_file(int file);
+void read_and_write(int file_from, int file_to);
+void close_file(int FD_VALUE);
 
 /**
  * check_args - check that there are 3-command-line args
@@ -30,16 +30,16 @@ void check_args(int argc)
 
 int open_file_read(char *filename)
 {
-	int fileFrom;
+	int file_from;
 
-	fileFrom = open(filename, O_RDONLY);
+	file_from = open(filename, O_RDONLY);
 
-	if (fileFrom == -1)
+	if (file_from == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
 		exit(98);
 	}
-	return (fileFrom);/*descriptor*/
+	return (file_from);/*descriptor*/
 }
 
 /**
@@ -52,48 +52,48 @@ int open_file_read(char *filename)
 
 int open_file_write(char *filename)
 {
-	int fileTo;
+	int file_to;
 
-	fileTo = open(filename, O_WRONLY | O_CREAT | O_TRUNC,
+	file_to = open(filename, O_WRONLY | O_CREAT | O_TRUNC,
 			S_IRUSR | S_IWUSR | S_IWGRP | S_IROTH);
 
-	if (fileTo == -1)
+	if (file_to == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
+		dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", filename);
 		exit(99);
 	}
-	return (fileTo); /*descriptor*/
+	return (file_to); /*descriptor*/
 }
 
 /**
  * read_and_write - func to copy contents of one file to another
  *
- * @fileFrom: file descriptor for the file to read from
- * @fileTo: File descriptor for the file to write to
+ * @file_from: file descriptor for the file to read from
+ * @file_to: File descriptor for the file to write to
 */
 
-void read_and_write(int fileFrom, int fileTo)
+void read_and_write(int file_from, int file_to)
 {
 	int bufferSize = 1024, numBytesRead = 0;
 	char buffer[1024];
 
 	while (bufferSize == 1024)
 	{
-		bufferSize = read(fileFrom, buffer, 1024);
+		bufferSize = read(file_from, buffer, 1024);
 
 		if (bufferSize == -1)
 		{
-			dprintf(STDERR_FILENO, "Error: Can't read from file descriptor %d\n",
-				fileFrom);
+			dprintf(STDERR_FILENO, "Error: Can't read from file %d\n",
+				file_from);
 
 			exit(98);
 		}
-		numBytesRead = write(fileTo, buffer, bufferSize);
+		numBytesRead = write(file_to, buffer, bufferSize);
 
 		if (numBytesRead < bufferSize)
 		{
-			dprintf(STDERR_FILENO, "Error: Can't write to file descriptor %d\n",
-				fileTo);
+			dprintf(STDERR_FILENO, "Error: Can't write to file %d\n",
+				file_to);
 			exit(99);
 		}
 	}
@@ -102,14 +102,14 @@ void read_and_write(int fileFrom, int fileTo)
 /**
  * close_file - func to close file descriptor
  *
- * @file: file descriptor to close
-*/
+ * @FD_VALUE: file descriptor to close
+ */
 
-void close_file(int file)
+void close_file(int FD_VALUE)
 {
-	if (close(file) == -1)
+	if (close(FD_VALUE) == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close file descriptor %d\n", file);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", FD_VALUE);
 		exit(100);
 	}
 }
@@ -124,18 +124,18 @@ void close_file(int file)
 
 int main(int argc, char *argv[])
 {
-	int fileFrom, fileTo;
+	int file_from, file_to;
 
 	check_args(argc);
 
-	fileFrom = open_file_read(argv[1]);
-	fileTo = open_file_write(argv[2]);
+	file_from = open_file_read(argv[1]);
+	file_to = open_file_write(argv[2]);
 
-	read_and_write(fileFrom, fileTo);
+	read_and_write(file_from, file_to);
 
-	close_file(fileFrom);
+	close_file(file_from);
 
-	close_file(fileTo);
+	close_file(file_to);
 
 	return (0);
 }
