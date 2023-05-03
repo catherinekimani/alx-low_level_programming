@@ -26,8 +26,8 @@ size_t free_listint_safe(listint_t **h)
 
 	if (*h)
 	{
-		*h = NULL;
 		free(*h);
+		*h = NULL;
 		num_nodes++;
 	}
 	return (num_nodes);
