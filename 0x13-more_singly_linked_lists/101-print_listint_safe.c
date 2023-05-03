@@ -13,7 +13,7 @@ size_t print_listint_safe(const listint_t *head)
 	listint_t *current_node = (listint_t *)head;
 
 	num_nodes = 0;
-	while (current_node && current_node >= current_node->next)
+	while (current_node && current_node > current_node->next)
 	{
 		printf("[%p] %d\n", (void *)current_node, current_node->n);
 		current_node = current_node->next;
