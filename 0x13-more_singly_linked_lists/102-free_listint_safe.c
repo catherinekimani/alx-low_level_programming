@@ -9,9 +9,10 @@
 
 size_t free_listint_safe(listint_t **h)
 {
-	size_t num_nodes = 0;
+	size_t num_nodes;
 	listint_t *current_node;
 
+	num_nodes = 0;
 	if (!h)
 		return (num_nodes);
 
@@ -23,10 +24,10 @@ size_t free_listint_safe(listint_t **h)
 		num_nodes++;
 	}
 
-	if (!h)
+	if (*h)
 	{
-		free(*h);
 		*h = NULL;
+		free(*h);
 		num_nodes++;
 	}
 	return (num_nodes);
