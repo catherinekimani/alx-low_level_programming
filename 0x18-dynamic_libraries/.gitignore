@@ -1,0 +1,7 @@
+# static linking
+*_putchar.c
+*0-main.c
+*100-tests.py
+*.c
+*.o
+len
