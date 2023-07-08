@@ -44,7 +44,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 
 	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
 		return (0);
-	
+
 	index = key_index((const unsigned char *)key, ht->size);
 	current = ht->shead;
 	while (current)
@@ -184,20 +184,19 @@ void shash_table_print_rev(const shash_table_t *ht)
  */
 void shash_table_delete(shash_table_t *ht)
 {
-	unsigned long int idx;
 	shash_node_t *current_node, *next_node;
+	shash_table_t *head = ht;
 
-	for (idx = 0; idx < ht->size; idx++)
+	if (ht == NULL)
+		return;
+	current_node = ht->shead;
+	while (current_node)
 	{
-		current_node = ht->array[idx];
-		while (current_node != NULL)
-		{
-			next_node = current_node->next;
+			next_node = current_node->snext;
 			free(current_node->key);
 			free(current_node->value);
 			free(current_node);
 			current_node = next_node;
-		}
 	}
 	free(ht->array);
 	free(ht);
