@@ -192,12 +192,12 @@ void shash_table_delete(shash_table_t *ht)
 	current_node = ht->shead;
 	while (current_node)
 	{
-			next_node = current_node->snext;
-			free(current_node->key);
-			free(current_node->value);
-			free(current_node);
-			current_node = next_node;
+		next_node = current_node->snext;
+		free(current_node->key);
+		free(current_node->value);
+		free(current_node);
+		current_node = next_node;
 	}
-	free(ht->array);
-	free(ht);
+	free(head->array);
+	free(head);
 }
