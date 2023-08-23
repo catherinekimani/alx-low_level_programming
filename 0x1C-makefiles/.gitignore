@@ -1,0 +1,8 @@
+.vscode/
+__pycache__/
+*school
+*a.out
+*.c
+*.o
+*.h
+*5-main.py
